@@ -3,7 +3,7 @@
   "description": "PHP url interaction library using object-oriented style",
   "type": "library",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "autoload": {
     "psr-4": {
       "Diffhead\\PHP\\Url\\": "src/",

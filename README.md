@@ -16,6 +16,7 @@ This library requires PHP 8.2 and newer.
 * Url - URL instance representation
 * Util - Inner utilities
 * Parser - Raw string url parser
+* Facade - Facade simplify usage
 
 #### Builders
 
@@ -35,6 +36,17 @@ php vendor/bin/phpunit
 ```
 
 ## Usage example
+
+#### Facade usage
+```php
+use Diffhead\PHP\Url\Facade;
+
+/**
+ * @var \Diffhead\PHP\Url\Url $url
+ */
+$url = Facade::parse('www.google.com');
+$string = Facade::toRfc3986String($url);
+```
 
 #### Parsing URL
 ```php
