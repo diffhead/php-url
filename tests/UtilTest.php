@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diffhead\PHP\Tests;
+namespace Diffhead\PHP\Url\Tests;
 
 use Diffhead\PHP\Url\Port;
 use Diffhead\PHP\Url\Scheme;

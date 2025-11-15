@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diffhead\PHP\Tests\Serializer;
+namespace Diffhead\PHP\Url\Tests\Serializer;
 
 use Diffhead\PHP\Url\Port;
 use Diffhead\PHP\Url\Scheme;

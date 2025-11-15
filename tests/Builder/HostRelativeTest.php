@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diffhead\PHP\Tests\Builder;
+namespace Diffhead\PHP\Url\Tests\Builder;
 
 use Diffhead\PHP\Url\Builder\HostRelative;
 use Diffhead\PHP\Url\Port;

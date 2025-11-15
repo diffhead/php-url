@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Diffhead\PHP\Tests\Dto;
+namespace Diffhead\PHP\Url\Tests\Dto;
 
 use Diffhead\PHP\Url\Dto\Replace;
 use PHPUnit\Framework\Attributes\CoversClass;
