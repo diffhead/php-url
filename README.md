@@ -46,6 +46,24 @@ use Diffhead\PHP\Url\Facade;
  */
 $url = Facade::parse('www.google.com');
 $string = Facade::toRfc3986String($url);
+
+/**
+ * Parameters are optionally.
+ * If null passed then will not
+ * be replaced.
+ */
+$dto = new Replace(
+    scheme: 'https',
+    hostname: 'www.github.com',
+    port: 443,
+    path: '/',
+    parameters: []
+);
+
+/** 
+ * @var \Diffhead\PHP\Url\Url $replaced
+ */
+$replaced = Facade::replace($url, $dto);
 ```
 
 #### Parsing URL

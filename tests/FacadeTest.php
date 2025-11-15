@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Diffhead\PHP\Tests;
 
+use Diffhead\PHP\Url\Dto\Replace;
 use Diffhead\PHP\Url\Facade;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversMethod;
@@ -12,6 +13,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Facade::class)]
 #[CoversMethod(Facade::class, 'parse')]
 #[CoversMethod(Facade::class, 'toRfc3986String')]
+#[CoversMethod(Facade::class, 'replace')]
 class FacadeTest extends TestCase
 {
     public function testParsingOnEmptyString(): void
@@ -54,5 +56,31 @@ class FacadeTest extends TestCase
         $convertedUrl = Facade::toRfc3986String($url);
 
         $this->assertSame($originUrl, $convertedUrl);
+    }
+
+    public function testUrlAttributesReplacement(): void
+    {
+        $raw = 'http://example.com/path?param=oldValue';
+        $origin = Facade::parse($raw);
+
+        $replace = new Replace(
+            scheme: 'https',
+            hostname: 'new-example.com',
+            path: '/new-path',
+            port: 443,
+            parameters: ['param' => 'newValue', 'addedParam' => 'addedValue'],
+        );
+
+        $replaced = Facade::replace($origin, $replace);
+
+        $this->assertSame('https', $replaced->scheme());
+        $this->assertSame('new-example.com', $replaced->hostname());
+        $this->assertSame('/new-path', $replaced->path());
+        $this->assertSame(443, $replaced->port());
+
+        $this->assertSame(
+            ['param' => 'newValue', 'addedParam' => 'addedValue'],
+            $replaced->parameters()
+        );
     }
 }

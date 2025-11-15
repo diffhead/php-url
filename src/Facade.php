@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Diffhead\PHP\Url;
 
 use Closure;
+use Diffhead\PHP\Url\Builder\ReplaceAttributes;
+use Diffhead\PHP\Url\Dto\Replace;
 use Diffhead\PHP\Url\Exception\UrlRuntimeException;
 use Diffhead\PHP\Url\Serializer\RFC3986;
 
@@ -27,6 +29,31 @@ class Facade
     {
         $serializer = new RFC3986();
         return $serializer->toString($url);
+    }
+
+    public static function replace(Url $url, Replace $replacements): Url
+    {
+        $builder = new ReplaceAttributes($url);
+
+        $parameters = [];
+
+        if ($replacements->scheme() !== null) {
+            $parameters['scheme'] = $replacements->scheme();
+        }
+
+        if ($replacements->path() !== null) {
+            $parameters['path'] = $replacements->path();
+        }
+
+        if ($replacements->port() !== null) {
+            $parameters['port'] = $replacements->port();
+        }
+
+        if ($replacements->parameters() !== null) {
+            $parameters['parameters'] = $replacements->parameters();
+        }
+
+        return $builder->build($replacements->hostname() ?? '', $parameters);
     }
 
     /**
